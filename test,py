@@ -1,0 +1,27 @@
+from pathlib import Path
+
+import joblib
+import pandas as pd
+
+
+BASE_DIR = Path(__file__).resolve().parent
+model = joblib.load(BASE_DIR / "customer_churn_model.pkl")
+scaler = joblib.load(BASE_DIR / "scaler.pkl")
+
+assert hasattr(model, "predict")
+assert hasattr(model, "predict_proba")
+assert list(scaler.feature_names_in_)
+
+sample = pd.DataFrame(
+    [[0, 12, 70.0, 1000.0] + [0] * (len(scaler.feature_names_in_) - 4)],
+    columns=scaler.feature_names_in_,
+)
+scaled_sample = scaler.transform(sample)
+prediction = model.predict(scaled_sample)
+probability = model.predict_proba(scaled_sample)
+
+assert prediction.shape == (1,)
+assert probability.shape == (1, 2)
+assert 0 <= probability[0].sum() <= 1.000001
+
+print("Model artifacts and prediction smoke test passed.")
