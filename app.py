@@ -45,7 +45,7 @@ except (FileNotFoundError, OSError, ValueError) as error:
 # =========================================================
 # CUSTOM CSS
 # =========================================================
-st.markdown("""
+st.markdown("""""
 <style>
 
 /* Hide Streamlit top header */
@@ -134,26 +134,53 @@ st.markdown("""
         color: #4f46e5 !important;
     }
 
-    /* -------------------------------
-       INPUTS
-    ------------------------------- */
+   /* -------------------------------
+   INPUTS
+------------------------------- */
 
-    div[data-baseweb="select"] > div {
-        background-color: #ffffff !important;
-        color: #1e293b !important;
-        border-color: #cbd5e1 !important;
-        border-radius: 9px !important;
-    }
+/* FORCE STREAMLIT WIDGET LABELS TO BE VISIBLE */
+div[data-testid="stWidgetLabel"] *,
+div[data-testid="stWidgetLabel"] label *,
+div[data-testid="stWidgetLabel"] p,
+div[data-testid="stWidgetLabel"] label,
+.stSelectbox label,
+.stTextInput label,
+.stNumberInput label,
+.stSlider label {
+    color: #334155 !important;
+    -webkit-text-fill-color: #334155 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-weight: 600 !important;
+}
 
-    div[data-baseweb="input"] > div {
-        background-color: #ffffff !important;
-        border-color: #cbd5e1 !important;
-        border-radius: 9px !important;
-    }
+/* Dropdown boxes */
+div[data-baseweb="select"] > div {
+    background-color: #ffffff !important;
+    color: #1e293b !important;
+    border-color: #cbd5e1 !important;
+    border-radius: 9px !important;
+}
 
-    div[data-baseweb="input"] input {
-        color: #1e293b !important;
-    }
+/* Dropdown selected text */
+div[data-baseweb="select"] span {
+    color: #1e293b !important;
+    opacity: 1 !important;
+}
+
+/* Input boxes */
+div[data-baseweb="input"] > div {
+    background-color: #ffffff !important;
+    border-color: #cbd5e1 !important;
+    border-radius: 9px !important;
+}
+
+/* Input text */
+div[data-baseweb="input"] input {
+    color: #1e293b !important;
+    -webkit-text-fill-color: #1e293b !important;
+    opacity: 1 !important;
+}
 
     /* -------------------------------
        BUTTON
